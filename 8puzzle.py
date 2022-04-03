@@ -26,11 +26,10 @@ class Node:
     """ Node Class
 
     Attributes:
-        state: List simbolizing state of the puzzle.
+        state: List symbolising state of the puzzle.
         parent: Pointer to the parent node.
         depth: Depth of the current node in the tree.
-        move: Move.
-        TODO: Elaborate on move
+        move: The movement of the blank square. One of [U, D, L, R]
     """
     def __init__(self, state, parent, depth, move = None):
         self.state = state
@@ -113,7 +112,7 @@ def nilssonScore(currentState: list[int], goalState: list[int]) -> int:
 
 
 def expand(expandNode : Node, activeNodes : list[Node], visitedStates : list[list[int]]) -> None:
-    """ ates the curent node's children.
+    """ Creates the current node's children.
 
     Args:
         expandNode (Node): Node that we want to expand.
@@ -167,15 +166,15 @@ def aStarSearch(currentState : Node, goalState : list[int]) -> list:
     Returns:
         A list with the shortest path from the initial state to goal state.
     """
-    currentState.heuristic = calculateHeuristic(currentState.state, goalState)
+    currentState.heuristic = manhattanDistance(currentState.state, goalState)
     activeNodes = [] #list of the nodes of the tree that could be expanded
     visitedStates = [] #list of states that 
 
-    activeNodes.append(currentSate)
+    activeNodes.append(currentState)
 
     while(len(activeNodes) != 0):
         currentState = activeNodes.pop
-        expand(currentState, activeNodes, visitedNodes)
+        expand(currentState, activeNodes, visitedStates)
 
 
 def main() -> None:
