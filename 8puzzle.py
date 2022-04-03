@@ -69,8 +69,8 @@ def manhattanDistance(currentState : list[int], goalState : list[int]) -> int:
     return distance
 
 
-def nillsonScore(currentState: list[int], goalState: list[int]) -> int:
-    """ Calculates the expected Nillson Sequence 
+def nilssonScore(currentState: list[int], goalState: list[int]) -> int:
+    """ Calculates the expected Nilsson Sequence 
         Score from currentState to goalState.
     
     Args:
@@ -78,12 +78,36 @@ def nillsonScore(currentState: list[int], goalState: list[int]) -> int:
         goalState (list[int]): List containing the goal state.
     
     Returns:
-        int : The Nillson Sequence Score.
+        int : The Nilsson Sequence Score.
     """
     pn = manhattanDistance(currentState, goalState)
     sn = 0
     
-    
+    successors = {
+        1 : 2,
+        2 : 3,
+        3 : 4,
+        4 : 5,
+        5 : 6,
+        6 : 7,
+        7 : 8,
+        8 : 1
+    }
+    indices = [0, 1, 2, 5, 8, 7, 6, 3]
+    for index, val in enumerate(indices):
+        currVal = currentState[val]
+
+        if currVal == 0: 
+            continue
+        
+        succVal = successors[currVal]
+        nextVal = currentState[0] if val == 3 else currentState[indices[index + 1]]
+
+        if succVal != nextVal:
+            sn += 2
+
+    if currentState[4] != goalState[4]:
+        sn += 1
     
     return pn + 3 * sn
 
