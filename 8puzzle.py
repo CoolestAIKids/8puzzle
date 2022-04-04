@@ -94,15 +94,15 @@ def nilssonScore(currentState: list[int], goalState: list[int]) -> int:
     }
     indices = [0, 1, 2, 5, 8, 7, 6, 3]
     for index, val in enumerate(indices):
-        currVal = currentState[val]
+        curr = currentState[val]
 
-        if currVal == 0: 
+        if curr == 0: 
             continue
         
-        succVal = successors[currVal]
-        nextVal = currentState[0] if val == 3 else currentState[indices[index + 1]]
+        succ = successors[curr]
+        next = currentState[0] if val == 3 else currentState[indices[index + 1]]
 
-        if succVal != nextVal:
+        if succ != next:
             sn += 2
 
     if currentState[4] != goalState[4]:
