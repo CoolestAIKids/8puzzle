@@ -10,9 +10,9 @@ class Algorithm:
     def insertActive(self, stateNode):
         self.active.append(stateNode) #Figure out the rest later
 
-        for i in range(len(active)-1, 1, -1):
-            if(active[i].pathcost > active[i-1].pathcost):
-                active[i], active[i-1] = active[i-1], active[i]
+        for i in range(len(self.active)-1, 1, -1):
+            if(self.active[i].pathcost > self.active[i-1].pathcost):
+                self.active[i], self.active[i-1] = self.active[i-1], self.active[i]
 
 
 
@@ -44,7 +44,7 @@ class Algorithm:
 
                 if(verticalMove < 0):
                     move = "down"
-                elif(verticalMove > 0)
+                elif(verticalMove > 0):
                     move = "up"
                 elif(horizontalMove < 0):
                     move = "right"
