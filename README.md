@@ -16,3 +16,5 @@ python3 8puzzle.py path/to/input/file.txt
 ## Comments
 Everything has been commented in Google Docstings https://github.com/google/styleguide/blob/gh-pages/pyguide.md#38-comments-and-docstrings
 
+https://notability.com/n/GYbHSECpBgs~~z~75jyRm
+

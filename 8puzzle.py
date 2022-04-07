@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-import argparse
-
 """
 Authors:
     Juan Jose Castano Moreno
@@ -11,105 +9,7 @@ Authors:
     rishyak@nyu.edu
 """
 
-# https://github.com/google/styleguide/blob/gh-pages/pyguide.md#38-comments-and-docstrings
-""" Description
-    
-    Args:
-        arg1 (type): Description.
-        arg2 (type): Description.
-    
-    Returns:
-        type : Description.
-"""
-
-class Node:
-    """ Node Class
-
-    Attributes:
-        state: List symbolising state of the puzzle.
-        parent: Pointer to the parent node.
-        depth: Depth of the current node in the tree.
-        move: The movement of the blank square. One of [U, D, L, R]
-    """
-    def __init__(self, state, parent, depth, move = None):
-        self.state = state
-        self.parent = parent
-        self.depth = depth
-        self.move = move
-
-
-def manhattanDistance(currentState : list[int], goalState : list[int]) -> int:
-    """ Calculates the expected Manhattan Distance 
-        from currentState to goalState.
-    
-    Args:
-        currentState (list[int]): List containing the current state.
-        goalState (list[int]): List containing the goal state.
-    
-    Returns:
-        int : The Manhattan Distance.
-    """
-    distance = 0
-    for index, item in enumerate(currentState):
-        if item == 0:
-            continue
-
-        currRow = index//3
-        currCol = index%3
-        
-        goalRow = goalState.index(item)//3
-        goalCol = goalState.index(item)%3
-        
-        horDist = abs(goalRow - currRow)
-        verDist = abs(currCol - goalCol)
-
-        distance += horDist + verDist
-
-    return distance
-
-
-def nilssonScore(currentState: list[int], goalState: list[int]) -> int:
-    """ Calculates the expected Nilsson Sequence 
-        Score from currentState to goalState.
-    
-    Args:
-        currentState (list[int]): List containing the current state.
-        goalState (list[int]): List containing the goal state.
-    
-    Returns:
-        int : The Nilsson Sequence Score.
-    """
-    pn = manhattanDistance(currentState, goalState)
-    sn = 0
-    
-    successors = {
-        1 : 2,
-        2 : 3,
-        3 : 4,
-        4 : 5,
-        5 : 6,
-        6 : 7,
-        7 : 8,
-        8 : 1
-    }
-    indices = [0, 1, 2, 5, 8, 7, 6, 3]
-    for index, val in enumerate(indices):
-        curr = currentState[val]
-
-        if curr == 0: 
-            continue
-        
-        succ = successors[curr]
-        next = currentState[0] if val == 3 else currentState[indices[index + 1]]
-
-        if succ != next:
-            sn += 2
-
-    if currentState[4] != goalState[4]:
-        sn += 1
-    
-    return pn + 3 * sn
-
+import argparse
 
 def expand(expandNode : Node, activeNodes : list[Node], visitedStates : list[list[int]]) -> None:
     """ Creates the current node's children.

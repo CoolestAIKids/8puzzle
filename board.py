@@ -11,9 +11,6 @@ Authors:
     rishyak@nyu.edu
 """
 
-from today import manhattanDistance
-
-
 class Board:
     """ Board Class
     
@@ -24,6 +21,15 @@ class Board:
     def __init__(self, board : list[int], goal : list[int]) -> None:
         self.board = board
         self.goal = goal
+
+    
+    def __str__(self):
+        """ Print method
+
+        Returns:
+            str : String representation of the board.
+        """
+        return f"Current State = \n{self.board}\nGoal State = \n{self.goal}\n"
 
 
     @staticmethod
@@ -41,7 +47,7 @@ class Board:
         """
         currRow = current//3
         currCol = current%3
-        
+
         goalRow = goal//3
         goalCol = goal%3
 
@@ -79,7 +85,7 @@ class Board:
         """
         pn = self.manhattanDistance(self.board, self.goal)
         sn = 0
-        
+
         successors = {
             1 : 2,
             2 : 3,
@@ -96,7 +102,7 @@ class Board:
 
             if curr == 0: 
                 continue
-            
+
             succ = successors[curr]
             next = self.board[0] if val == 3 else self.board[indices[index + 1]]
 
@@ -105,22 +111,5 @@ class Board:
 
         if self.board[4] != self.goal[4]:
             sn += 1
-        
+
         return pn + 3 * sn
-
-
-    def pathCost(self, depth : int, heuristic : int) -> int:
-        """ Calculates the path cost f(n)
-
-        Args:
-            depth (int): Depth of the node.
-            heuristic (int): Heuristic value of the node. 
-                1 for Manhattan Distance
-                2 for Nilsson Sequence Score
-
-        Returns:
-            int : The path cost f(n).
-        """
-        hn = self.manhattanDistance() if heuristic == 1 else self.nilssonScore()
-
-        return depth + hn
