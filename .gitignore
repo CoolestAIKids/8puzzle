@@ -1,0 +1,5 @@
+# Redundant folders
+.idea
+.vscode
+__pycache__
+venv
