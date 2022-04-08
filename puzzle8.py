@@ -10,27 +10,7 @@ Authors:
 """
 
 import argparse
-from Algorithm import *
-def aStarSearch(currentState : Node, goalState : list[int]) -> list:
-    """ Takes initial and goal states calculates the 
-        shortest path to the goal state
-
-    Args:
-        currentState: Starting node for the algorithm.
-        goalState: List containing the goal state.
-
-    Returns:
-        A list with the shortest path from the initial state to goal state.
-    """
-    currentState.heuristic = manhattanDistance(currentState.state, goalState)
-    activeNodes = [] #list of the nodes of the tree that could be expanded
-    visitedStates = [] #list of states that 
-
-    activeNodes.append(currentState)
-
-    while(len(activeNodes) != 0):
-        currentState = activeNodes.pop
-        #expand(currentState, activeNodes, visitedStates)
+from algorithm import Algorithm
 
 
 def main() -> None:
