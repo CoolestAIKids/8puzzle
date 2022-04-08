@@ -10,7 +10,7 @@ Authors:
 """
 
 import argparse
-
+from Algorithm import *
 def aStarSearch(currentState : Node, goalState : list[int]) -> list:
     """ Takes initial and goal states calculates the 
         shortest path to the goal state

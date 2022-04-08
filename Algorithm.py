@@ -1,14 +1,33 @@
 #!/usr/bin/python3
 
-from 8puzzle import *
+from node import Node
+from board import Board
 
+
+""" Algorithm Class
+
+    Attributes:
+        active (list[Node]): List with the current states of the puzzle to be expanded
+        visited (list[Node]) : List with the Nodes that were visited already
+    """
 class Algorithm:
-    def __init__(self):
+    def __init__(self, initialNode):
         self.active = []
+        self.insertActive(initialNode)
         self.visited = []
 
-    def insertActive(self, stateNode):
+    def insertActive(self, stateNode : Node) -> None:
+        """ Properly inserts a node in the list of active nodes.
+
+                Args:
+                    stateNode (Node): Node that we want to insert into active
+
+                Returns:
+                    None. Function modifies the activeNodes and the visitedStates lists.
+                """
         self.active.append(stateNode) #Figure out the rest later
+        if(len(active) == 1):
+            return
 
         for i in range(len(self.active)-1, 1, -1):
             if(self.active[i].pathcost > self.active[i-1].pathcost):
@@ -21,8 +40,6 @@ class Algorithm:
 
         Args:
             expandNode (Node): Node that we want to expand.
-            activeNodes (list[int]): List of nodes that are yet to be expanded.
-            visitedNodes (list[list[int]]): List of already visited nodes.
 
         Returns:
             None. Function modifies the activeNodes and the visitedStates lists.
@@ -55,3 +72,23 @@ class Algorithm:
                 if(newNode not in self.visited):
                     self.insertActive(newNode)
         self.visited.append(expandNode)
+
+    def aStarSearch(self) -> list:
+        """ Calculates shortest path to goal state
+
+        Returns:
+            A list with the shortest path from the initial state to goal state.
+        """
+        while(len(self.active) > 0):
+
+            nodeToExpand = self.active.pop()
+
+            if(nodeToExpand.state.board == nodeToExpand.state.goal):
+                return nodeToExpand
+
+            self.expand(nodeToExpand)
+
+        return 0
+
+
+
