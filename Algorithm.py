@@ -2,6 +2,7 @@
 
 from node import Node
 from board import Board
+distance = Board.distance
 
 
 """ Algorithm Class
@@ -55,8 +56,9 @@ class Algorithm:
             currRow = index // 3
             currCol = index % 3
 
-            if (((abs(currRow - emptyRow)) == 1) or (abs(currCol - emptyCol) == 1)):
-                newState = expandNode.state.board
+            # if (((abs(currRow - emptyRow)) == 1) and (abs(currCol - emptyCol) == 1)):
+            if (distance(index, emptyIndex) == 1):
+                newState = expandNode.state.board[:]
                 newState[index], newState[emptyIndex] = newState[emptyIndex], newState[index]
                 verticalMove = currRow - emptyRow
                 horizontalMove = currCol - emptyCol
