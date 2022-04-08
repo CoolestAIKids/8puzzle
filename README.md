@@ -14,7 +14,7 @@ This code has been tested on Ubuntu, Arch, and macOS.
 
 Keep in mind that you need to have Python installed.   
 ```bash
-python3 8puzzle.py path/to/input/file.txt
+python3 puzzle8.py path/to/input/file.txt
 ```
 
 
@@ -25,7 +25,7 @@ As stated above, this project has been categorised into multiple module files th
 |board.py|Holds the entire Board module, including the heuristic functions.|
 |node.py|Holds the node module to help the algorithm. It also contains an equality operator definition to compare nodes.|
 |algorithm.py|The algorithm code. Holds the A* search algorithm, node expansion, and priority queue handling|
-|8puzzle.py|The main file that you should run. This takes the path of the input file as an input and returns the final output on both, `stdout` and as a file.|
+|puzzle8.py|The main file that you should run. This takes the path of the input file as an input and returns the final output on both, `stdout` and as a file.|
 
 
 ## Nodepad

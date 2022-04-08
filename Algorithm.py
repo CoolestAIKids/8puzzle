@@ -28,7 +28,7 @@ class Algorithm:
                     None. Function modifies the activeNodes and the visitedStates lists.
                 """
         self.active.append(stateNode)
-        if(len(active) == 1):
+        if(len(self.active) == 1):
             return
 
         for i in range(len(self.active)-1, 1, -1):
@@ -46,7 +46,7 @@ class Algorithm:
         Returns:
             None. Function modifies the activeNodes and the visitedStates lists.
         """
-        emptyIndex = expandNode.board.state.index(0)
+        emptyIndex = expandNode.state.board.index(0)
         emptyRow = emptyIndex // 3
         emptyCol = emptyIndex % 3
 
@@ -56,7 +56,7 @@ class Algorithm:
             currCol = index % 3
 
             if (((abs(currRow - emptyRow)) == 1) or (abs(currCol - emptyCol) == 1)):
-                newState = expandNode.board.state
+                newState = expandNode.state.board
                 newState[index], newState[emptyIndex] = newState[emptyIndex], newState[index]
                 verticalMove = currRow - emptyRow
                 horizontalMove = currCol - emptyCol
@@ -70,7 +70,7 @@ class Algorithm:
                 elif(horizontalMove > 0):
                     move = "left"
 
-                newNode = Node(newState, expandNode.goal, 1, expandNode, expandNode.depth + 1, move)
+                newNode = Node(newState, expandNode.state.goal, 1, expandNode, expandNode.depth + 1, move)
                 if(newNode not in self.visited):
                     self.insertActive(newNode)
                     self.totalNodes += 1
@@ -97,10 +97,9 @@ class Algorithm:
                     nodeToExpand = nodeToExpand.parent
                     parent = nodeToExpand.parent
 
-                return moves,pathcosts,self.totalNodes
+                return [moves, pathcosts, self.totalNodes]
             
             self.expand(nodeToExpand)
-
 
         return 0
 

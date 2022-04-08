@@ -10,7 +10,9 @@ Authors:
 """
 
 import argparse
+
 from algorithm import Algorithm
+from node import Node
 
 
 def main() -> None:
@@ -32,6 +34,13 @@ def main() -> None:
     input = list(map(int, input))
     init, goal = input[:9], input[9:]
     print(f"{init=}\n{goal=}") # ! Just for initial debugging TODO: Delete
+    
+    initialNode = Node(init, goal, 1)
+
+    aStar = Algorithm(initialNode)
+    solution = aStar.aStarSearch()
+
+    print(solution)
 
 
 if __name__ == '__main__':
