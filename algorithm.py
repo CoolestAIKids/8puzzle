@@ -17,6 +17,7 @@ class Algorithm:
         self.active = []
         self.insertActive(initialNode)
         self.visited = []
+        self.visitedArrays = []
         self.totalNodes = 1
 
 
@@ -56,7 +57,6 @@ class Algorithm:
             currRow = getRow(index)
             currCol = getCol(index)
 
-            # if (((abs(currRow - emptyRow)) == 1) and (abs(currCol - emptyCol) == 1)):
             if (distance(index, emptyIndex) == 1):
                 newState = expandNode.state.board[:]
                 newState[index], newState[emptyIndex] = newState[emptyIndex], newState[index]
@@ -72,13 +72,14 @@ class Algorithm:
                 elif(horizontalMove > 0):
                     move = "R"
 
-                newNode = Node(newState, expandNode.state.goal, 1, expandNode, expandNode.depth + 1, move)
-
-                if(newNode not in self.visited):
+                newNode = Node(newState, expandNode.state.goal, expandNode.heuristic, expandNode, expandNode.depth + 1, move)
+                if(newNode.state.board not in self.visitedArrays):
                     self.insertActive(newNode)
                     self.totalNodes += 1
 
         self.visited.append(expandNode)
+        self.visitedArrays.append(expandNode.state.board)
+
 
 
     def aStarSearch(self) -> list:
