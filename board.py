@@ -127,9 +127,10 @@ class Board:
         for index, val in enumerate(indices):
             curr = self.board[val]
 
-            if curr == 0: 
+            # Skip tile if it's the centre in the goal state
+            if curr == self.goal[4]: 
                 continue
-
+            
             succ = successors[curr]
             next = self.board[0] if val == 3 else self.board[indices[index + 1]]
 
