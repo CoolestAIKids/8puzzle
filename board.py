@@ -159,15 +159,16 @@ class Node:
         self.parent = parent
         self.depth = depth
         self.move = move
+        self.heuristic = heuristic
 
         if heuristic == 1:
-            hn = self.state.manhattanDistance()
+            self.hn = self.state.manhattanDistance()
         elif heuristic == 2:
-            self.state.nilssonScore()
+            self.hn = self.state.nilssonScore()
         else:
             raise ValueError("Invalid Heuristic")
 
-        self.pathcost = hn + self.depth
+        self.pathcost = self.hn + self.depth
 
     def __eq__(self, other) -> bool:
         """ Checks if two nodes are equal.
