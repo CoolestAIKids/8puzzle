@@ -109,7 +109,7 @@ class Board:
         Returns:
             int : The Nilsson Sequence Score.
         """
-        pn = self.manhattanDistance(self.board, self.goal)
+        pn = self.manhattanDistance()
         sn = 0
 
         successors = {

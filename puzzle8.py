@@ -83,8 +83,10 @@ def main() -> None:
 
     if cmdline.heuristic == '1':
         heuristic = 1
+        heur = "h1"
     elif cmdline.heuristic == '2':
         heuristic = 2
+        heur = "h2"
     else:
         raise(ValueError('Invalid heuristic.'))
 
@@ -92,7 +94,7 @@ def main() -> None:
     aStar = Algorithm(initialNode)
 
     solution = aStar.aStarSearch()
-    makeFile(cmdline.filename, "h1", init, goal, solution)
+    makeFile(cmdline.filename, heur, init, goal, solution)
 
 
 if __name__ == '__main__':
