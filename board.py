@@ -22,6 +22,16 @@ class Board:
         self.board = board
         self.goal = goal
 
+        self.successors = {}
+        self.successors[goal[0]] = self.goal[1]
+        self.successors[goal[1]] = self.goal[2]
+        self.successors[goal[2]] = self.goal[5]
+        self.successors[goal[3]] = self.goal[0]
+        self.successors[goal[5]] = self.goal[8]
+        self.successors[goal[6]] = self.goal[3]
+        self.successors[goal[7]] = self.goal[6]
+        self.successors[goal[8]] = self.goal[7]
+
     
     def __str__(self):
         """ Print method
@@ -112,16 +122,7 @@ class Board:
         pn = self.manhattanDistance()
         sn = 0
 
-        successors = {
-            1 : 2,
-            2 : 3,
-            3 : 4,
-            4 : 5,
-            5 : 6,
-            6 : 7,
-            7 : 8,
-            8 : 1
-        }
+        successors = self.successors
         indices = [0, 1, 2, 5, 8, 7, 6, 3]
         for index, val in enumerate(indices):
             curr = self.board[val]
