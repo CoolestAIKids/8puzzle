@@ -64,13 +64,13 @@ class Algorithm:
                 horizontalMove = currCol - emptyCol
 
                 if(verticalMove < 0):
-                    move = "down"
+                    move = "U"
                 elif(verticalMove > 0):
-                    move = "up"
+                    move = "D"
                 elif(horizontalMove < 0):
-                    move = "right"
+                    move = "L"
                 elif(horizontalMove > 0):
-                    move = "left"
+                    move = "R"
 
                 newNode = Node(newState, expandNode.state.goal, 1, expandNode, expandNode.depth + 1, move)
                 if(newNode not in self.visited):
