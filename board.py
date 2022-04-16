@@ -21,7 +21,6 @@ class Board:
     def __init__(self, board : list[int], goal : list[int]) -> None:
         self.board = board
         self.goal = goal
-
     
     def __str__(self):
         """ Print method
@@ -159,7 +158,7 @@ class Node:
         self.parent = parent
         self.depth = depth
         self.move = move
-
+        self.heuristic = heuristic
         if heuristic == 1:
             hn = self.state.manhattanDistance()
         elif heuristic == 2:
