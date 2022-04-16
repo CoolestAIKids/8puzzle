@@ -160,7 +160,13 @@ class Node:
         self.depth = depth
         self.move = move
 
-        hn = self.state.manhattanDistance() if heuristic == 1 else self.state.nilssonScore()
+        if heuristic == 1:
+            hn = self.state.manhattanDistance()
+        elif heuristic == 2:
+            self.state.nilssonScore()
+        else:
+            raise ValueError("Invalid Heuristic")
+
         self.pathcost = hn + self.depth
 
     def __eq__(self, other) -> bool:

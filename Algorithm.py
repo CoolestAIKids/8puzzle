@@ -73,9 +73,11 @@ class Algorithm:
                     move = "R"
 
                 newNode = Node(newState, expandNode.state.goal, 1, expandNode, expandNode.depth + 1, move)
+
                 if(newNode not in self.visited):
                     self.insertActive(newNode)
                     self.totalNodes += 1
+
         self.visited.append(expandNode)
 
 
@@ -88,19 +90,24 @@ class Algorithm:
         while(len(self.active) > 0):
 
             nodeToExpand = self.active.pop()
+            shallowestD = nodeToExpand.depth
 
             if(nodeToExpand.state.board == nodeToExpand.state.goal):
                 parent = nodeToExpand.parent
                 moves = []
                 pathcosts = []
 
-                while(parent != None):
+                while(True):
                     moves.insert(0, nodeToExpand.move)
                     pathcosts.insert(0, nodeToExpand.pathcost)
                     nodeToExpand = nodeToExpand.parent
                     parent = nodeToExpand.parent
+                    if parent == None:
+                        pathcosts.insert(0, nodeToExpand.pathcost)
+                        nodeToExpand = nodeToExpand.parent
+                        break
 
-                return [moves, pathcosts, self.totalNodes]
+                return [shallowestD, self.totalNodes, moves, pathcosts]
             
             self.expand(nodeToExpand)
 
