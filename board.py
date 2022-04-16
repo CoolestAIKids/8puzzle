@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Object file for the Board class
+Object file for the Board class and Node class
 
 Authors:
     Juan Jose Castano Moreno
@@ -33,6 +33,32 @@ class Board:
 
 
     @staticmethod
+    def getRow(index : int) -> int:
+        """ Returns the row of the index.
+        
+        Args:
+            index (int): Index of the board.
+        
+        Returns:
+            int : Row of the index.
+        """
+        return index // 3
+    
+
+    @staticmethod
+    def getCol(index : int) -> int:
+        """ Returns the column of the index.
+        
+        Args:
+            index (int): Index of the board.
+        
+        Returns:
+            int : Column of the index.
+        """
+        return index % 3
+
+
+    @staticmethod
     def distance(current : int, goal : int) -> int:
         """ Calculates the expected distance
             from a tile's current position
@@ -45,11 +71,11 @@ class Board:
         Returns:
             int : The expected distance.
         """
-        currRow = current//3
-        currCol = current%3
+        currRow = Board.getRow(current)
+        currCol = Board.getCol(current)
 
-        goalRow = goal//3
-        goalCol = goal%3
+        goalRow = Board.getRow(goal)
+        goalCol = Board.getCol(goal)
 
         horDist = abs(goalRow - currRow)
         verDist = abs(currCol - goalCol)
@@ -113,3 +139,40 @@ class Board:
             sn += 1
 
         return pn + 3 * sn
+
+
+class Node:
+    """ Node Class
+
+    Attributes:
+        board (list[int]): List symbolising state of the puzzle.
+        goal (list[int]): List symbolising goal state of the puzzle.
+        heuristic (int): The heuristic value of the current node.  
+            1 for Manhattan Distance
+            2 for Nilsson Sequence Score
+        parent (list[int]): Pointer to the parent node. Defaults to None.
+        depth (Node): Depth of the current node in the tree. Defaults to 0.
+        move (str): The movement of the blank square. One of [U, D, L, R]. Defaults to None.
+    """
+    def __init__(self, board, goal, heuristic, parent = None, depth = 0, move = None):
+        self.state = Board(board, goal)
+        self.parent = parent
+        self.depth = depth
+        self.move = move
+
+        hn = self.state.manhattanDistance() if heuristic == 1 else self.state.nilssonScore()
+        self.pathcost = hn + self.depth
+
+    def __eq__(self, other) -> bool:
+        """ Checks if two nodes are equal.
+
+        Args:
+            other (Node): Node to compare to.
+
+        Returns: 
+            bool: True if the nodes are equal, False otherwise.
+        """
+        if isinstance(other, Node):
+            return self.state == other.state
+        else:
+            return False
