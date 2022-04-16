@@ -72,7 +72,7 @@ class Algorithm:
                 elif(horizontalMove > 0):
                     move = "R"
 
-                newNode = Node(newState, expandNode.state.goal, 1, expandNode, expandNode.depth + 1, move)
+                newNode = Node(newState, expandNode.state.goal, expandNode.heuristic, expandNode, expandNode.depth + 1, move)
                 if(newNode not in self.visited):
                     self.insertActive(newNode)
                     self.totalNodes += 1

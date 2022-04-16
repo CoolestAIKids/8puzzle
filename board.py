@@ -159,7 +159,7 @@ class Node:
         self.parent = parent
         self.depth = depth
         self.move = move
-
+        self.heuristic = heuristic
         hn = self.state.manhattanDistance() if heuristic == 1 else self.state.nilssonScore()
         self.pathcost = hn + self.depth
 
