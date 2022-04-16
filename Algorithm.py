@@ -32,7 +32,7 @@ class Algorithm:
         if(len(self.active) == 1):
             return
 
-        for i in range(len(self.active)-1, 1, -1):
+        for i in reversed(range(1, len(self.active))):
             if(self.active[i].pathcost > self.active[i-1].pathcost):
                 self.active[i], self.active[i-1] = self.active[i-1], self.active[i]
 
