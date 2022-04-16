@@ -22,6 +22,7 @@ class Board:
         self.board = board
         self.goal = goal
 
+
         self.successors = {}
         self.successors[goal[0]] = self.goal[1]
         self.successors[goal[1]] = self.goal[2]
