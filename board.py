@@ -21,6 +21,18 @@ class Board:
     def __init__(self, board : list[int], goal : list[int]) -> None:
         self.board = board
         self.goal = goal
+
+
+        self.successors = {}
+        self.successors[goal[0]] = self.goal[1]
+        self.successors[goal[1]] = self.goal[2]
+        self.successors[goal[2]] = self.goal[5]
+        self.successors[goal[3]] = self.goal[0]
+        self.successors[goal[5]] = self.goal[8]
+        self.successors[goal[6]] = self.goal[3]
+        self.successors[goal[7]] = self.goal[6]
+        self.successors[goal[8]] = self.goal[7]
+
     
     def __str__(self):
         """ Print method
@@ -108,26 +120,18 @@ class Board:
         Returns:
             int : The Nilsson Sequence Score.
         """
-        pn = self.manhattanDistance(self.board, self.goal)
+        pn = self.manhattanDistance()
         sn = 0
 
-        successors = {
-            1 : 2,
-            2 : 3,
-            3 : 4,
-            4 : 5,
-            5 : 6,
-            6 : 7,
-            7 : 8,
-            8 : 1
-        }
+        successors = self.successors
         indices = [0, 1, 2, 5, 8, 7, 6, 3]
         for index, val in enumerate(indices):
             curr = self.board[val]
 
-            if curr == 0: 
+            # Skip tile if it's the centre in the goal state
+            if curr == self.goal[4]: 
                 continue
-
+            
             succ = successors[curr]
             next = self.board[0] if val == 3 else self.board[indices[index + 1]]
 
@@ -159,14 +163,15 @@ class Node:
         self.depth = depth
         self.move = move
         self.heuristic = heuristic
+
         if heuristic == 1:
-            hn = self.state.manhattanDistance()
+            self.hn = self.state.manhattanDistance()
         elif heuristic == 2:
-            self.state.nilssonScore()
+            self.hn = self.state.nilssonScore()
         else:
             raise ValueError("Invalid Heuristic")
 
-        self.pathcost = hn + self.depth
+        self.pathcost = self.hn + self.depth
 
     def __eq__(self, other) -> bool:
         """ Checks if two nodes are equal.
