@@ -12,7 +12,7 @@ Authors:
 import argparse
 
 from algorithm import Algorithm
-from node import Node
+from board import Node
 
 
 def main() -> None:
