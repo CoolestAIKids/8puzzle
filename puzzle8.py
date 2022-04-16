@@ -24,6 +24,7 @@ def makeFile(filename : str, heuristic : str, initial : list[int], goal : list[i
     Returns:
         None.
     """
+    # Format filename properly (remove ".txt")
     filename = filename[:-4]
     filename = f"{filename}_{heuristic}_output.txt"
 
@@ -32,8 +33,11 @@ def makeFile(filename : str, heuristic : str, initial : list[int], goal : list[i
     sequence = solution[2]
     fnValues = solution[3]
 
+    # Write to file
     with open(filename, 'w') as f:
+        # Counter for the formatting
         j = 0
+        # Write initial board
         for i in initial:
             j += 1
             f.write(str(i) + ' ')
@@ -42,6 +46,7 @@ def makeFile(filename : str, heuristic : str, initial : list[int], goal : list[i
                 j = 0
         f.write('\n')
 
+        # Write goal board
         for i in goal:
             j += 1
             f.write(str(i) + ' ')
@@ -50,13 +55,17 @@ def makeFile(filename : str, heuristic : str, initial : list[int], goal : list[i
                 j = 0
         f.write('\n')
 
+        # Write depth
         f.write(str(depth) + '\n')
+        # Write total number of generated nodes
         f.write(str(totalGen) + '\n')
 
+        # Write sequence of moves of black tile
         for i in sequence:
             f.write(str(i) + ' ')
         f.write('\n')
 
+        # Write f(n) values
         for i in fnValues:
             f.write(str(i) + ' ')
 
@@ -67,20 +76,24 @@ def main() -> None:
     Returns:
         None.
     """
+    # Parse arguments
     parser = argparse.ArgumentParser(description='Solve the 8-puzzle problem using A* search.')
     parser.add_argument('filename', help='The txt file containing the initial and goal states.')
     parser.add_argument('heuristic', help='The heuristic to be used. 1 for Manhattan Distance, 2 for Nilsson Sequence Score.')
     cmdline = parser.parse_args()
 
+    # Read input file
     with open(cmdline.filename, 'r') as f:
         input = []
         for line in f:
             line = line.strip().split()
             input = input + line
 
+    # Create initial and goal states
     input = list(map(int, input))
     init, goal = input[:9], input[9:]
 
+    # Find heuristic from command line
     if cmdline.heuristic == '1':
         heuristic = 1
         heur = "h1"
@@ -90,10 +103,14 @@ def main() -> None:
     else:
         raise(ValueError('Invalid heuristic.'))
 
-    initialNode = Node(init, goal, heuristic) # last one is heuristic
+    # Create initial node
+    initialNode = Node(init, goal, heuristic)
+    # Call algorithm
     aStar = Algorithm(initialNode)
 
+    # Get solution
     solution = aStar.aStarSearch()
+    # Make the file
     makeFile(cmdline.filename, heur, init, goal, solution)
 
 
