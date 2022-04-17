@@ -1,5 +1,4 @@
 # 8puzzle
-NYU Tandon's CS-UY 4613 Intro to Artificial Intelligence.   
 **Project 1**: the 8 puzzle game.  
 
 ## Description
@@ -11,11 +10,9 @@ A big topic of discussion was how to dequeue when we get the same f(n) values. W
 
 
 ## Resources Used
-We had to look at Python documentation a whole lot, and occasionally email the professor, but no other outside resources were used.
+We had to look at Python documentation a whole lot, and occasionally email the professor, but no other outside resources were used. We also used the slides on A-star search and the textbook.
 
-We also used the slides on A-star search and the textbook.
-
-We had a lot of questions about implementing Nilsson Sequence Score, so we spoke to the professor about that. He told us that we skip the blank tile when going clockwise and count the centre tile of the goal node. We account for this by stating that the successor of the centre tile is itself. 
+We had a lot of questions about implementing Nilsson Sequence Score, so we spoke to the professor. He told us to skip the blank tile when going clockwise and count the centre tile of the goal node. We account for this by stating that the successor of the centre tile is itself. 
 
 
 ## Running the Project
@@ -61,3 +58,6 @@ jc10536@nyu.edu
 Rishyak Panchal   
 rishyak@nyu.edu   
 [@rishyak](https://github.com/rishyak)   
+
+## Course
+NYU Tandon's CS-UY 4613 Intro to Artificial Intelligence.   
