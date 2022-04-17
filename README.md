@@ -15,6 +15,8 @@ We had to look at Python documentation a whole lot, and occasionally email the p
 
 We also used the slides on A-star search and the textbook.
 
+We had a lot of questions about implementing Nilsson Sequence Score, so we spoke to the professor about that. He told us that we skip the blank tile when going clockwise and count the centre tile of the goal node. We account for this by stating that the successor of the centre tile is itself. 
+
 
 ## Running the Project
 It is recommended that you use a computer running Linux or macOS to run this code. Also ensure that the computer has a clean copy of `Python >3.8` installed. This project has been tested with all releases of Python till the latest one, `Python 3.10`.   
