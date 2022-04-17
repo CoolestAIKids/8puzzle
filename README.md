@@ -60,4 +60,4 @@ rishyak@nyu.edu
 [@rishyak](https://github.com/rishyak)   
 
 ## Course
-NYU Tandon's CS-UY 4613 Intro to Artificial Intelligence.   
+NYU Tandon's CS-UY 4613 Intro to Artificial Intelligence.  
