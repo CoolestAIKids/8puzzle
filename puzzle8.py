@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 
-"""
+""" Driver code for the program.
+    This is the file that you will invoke from 
+    the command line like so:
+    $ python3 puzzle8.py <filename> <heuristic>
+
 Authors:
     Juan Jose Castano Moreno
     jc10536@nyu.edu
@@ -19,10 +23,19 @@ def makeFile(filename : str, heuristic : str, initial : list[int], goal : list[i
 
     Args:
         filename (str): Name of the file to be created.
+        heuristic (str): Heuristic used.
+        initial (list[int]): Initial state.
+        goal (list[int]): Goal state.
         solution (list[Node]): List with the solution to the puzzle.
+            Contains:
+                1. Shallowest depth of goal node.
+                2. Total number of nodes generated.
+                3. Sequence of actions to get to the goal state.
+                4. f(n) values for each node in the solution path.
 
     Returns:
         None.
+        Just creates a file with the solution.
     """
     # Format filename properly (remove ".txt")
     filename = filename[:-4]

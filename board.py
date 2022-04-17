@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
-"""
-Object file for the Board class and Node class
+""" Object file for the Board class and Node class.
+    This provides the objects and heuristic functionality
+    for the puzzle. This is imported to algorithm.py and 
+    Node is imported to puzzle8.py.
 
 Authors:
     Juan Jose Castano Moreno
@@ -31,6 +33,10 @@ class Board:
         self.successors[goal[1]] = goal[2]
         self.successors[goal[2]] = goal[5]
         self.successors[goal[3]] = goal[0]
+        # Since the centre tile does not have a 
+        # successor, we just say that it is its
+        # own successor.
+        self.successors[goal[4]] = goal[4]
         self.successors[goal[5]] = goal[8]
         self.successors[goal[6]] = goal[3]
         self.successors[goal[7]] = goal[6]
@@ -140,8 +146,8 @@ class Board:
         for index, val in enumerate(indices):
             curr = self.board[val]
 
-            # Skip tile if it's the centre in the goal state
-            if curr == self.goal[4]: 
+            # Skip blank tile
+            if curr == 0: 
                 continue
             
             # Get the successor of the current tile and the next tile
