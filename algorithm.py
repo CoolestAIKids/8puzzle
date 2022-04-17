@@ -35,7 +35,7 @@ class Algorithm:
         self.active.append(stateNode)
         if(len(self.active) == 1):
             return
-
+        # Move stateNode to the left so that list is organized from biggest to smallest
         for i in reversed(range(1, len(self.active))):
             if(self.active[i].pathcost > self.active[i-1].pathcost):
                 self.active[i], self.active[i-1] = self.active[i-1], self.active[i]
@@ -55,11 +55,14 @@ class Algorithm:
         emptyRow = getRow(emptyIndex)
         emptyCol = getCol(emptyIndex)
 
+        # Going over all values of the current state that we need to expand
         for index in range(len(expandNode.state.board)):
 
             currRow = getRow(index)
             currCol = getCol(index)
 
+            # If the distance between the current tile and the empty tile is 1,
+            # that means we can obtain new states from there
             if (distance(index, emptyIndex) == 1):
                 newState = expandNode.state.board[:]
                 newState[index], newState[emptyIndex] = newState[emptyIndex], newState[index]
@@ -76,6 +79,9 @@ class Algorithm:
                     move = "R"
 
                 newNode = Node(newState, expandNode.state.goal, expandNode.heuristic, expandNode, expandNode.depth + 1, move)
+
+                # If the new node created hasn't been visited yet,
+                # then add it to the list of nodes to expand
                 if(newNode.state.board not in self.visitedArrays):
                     self.insertActive(newNode)
                     self.totalNodes += 1
@@ -90,16 +96,21 @@ class Algorithm:
         Returns:
             A list with the shortest path from the initial state to goal state.
         """
+        # While there are active states in the tree
         while(len(self.active) > 0):
 
+            # This will give us the active node with the smallest f(n)
             nodeToExpand = self.active.pop()
             shallowestD = nodeToExpand.depth
 
+            # If the current node is a goal node
             if(nodeToExpand.state.board == nodeToExpand.state.goal):
                 parent = nodeToExpand.parent
                 moves = []
                 pathcosts = []
 
+                # This loop goes over the solution path to gather the data
+                # that the algorithm should return
                 while(True):
                     moves.insert(0, nodeToExpand.move)
                     pathcosts.insert(0, nodeToExpand.pathcost)
